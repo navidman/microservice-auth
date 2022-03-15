@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -16,6 +17,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $guarded = [];
 
+    public function checkOtp($otp)
+    {
+        if ($this->otp and $this->otp == $otp and $this->otp_expired_at > Carbon::now()) {
+            $this->update([
+                'otp' => null
+            ]);
+            return true;
+        }
 
+        return false;
+    }
 
 }
