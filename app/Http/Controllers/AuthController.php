@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+
 class AuthController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $user_repository;
+
+    public function __construct(UserRepositoryInterface $user_repository)
     {
-        //
+        $this->user_repository = $user_repository;
     }
 
     public function index()
     {
-        return 'navid';
+        $mobile = '09139071587';
+        return $this->user_repository->getUserByMobile($mobile);
     }
 
-    public function otp()
+    public function otp(Request $request)
     {
         return 'otp';
     }
