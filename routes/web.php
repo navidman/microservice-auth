@@ -13,6 +13,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('', ['uses' => 'AuthController@index']);
+$router->post('otp', ['uses' => 'AuthController@otp']);
+$router->post('otp/resend', ['uses' => 'AuthController@resendOtp']);
+$router->post('token', ['uses' => 'AuthController@token']);
+
+$router->group(['middleware' => 'auth:api'], function () use ($router) {
+    $router->get('token/check', ['uses' => 'AuthController@checkToken']);
 });
