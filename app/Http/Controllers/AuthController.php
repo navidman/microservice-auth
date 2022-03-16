@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Authentication\Authentication;
-use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    private $user_repository;
 
-    public function __construct(UserRepositoryInterface $user_repository)
+    public function __construct()
     {
-        $this->user_repository = $user_repository;
     }
 
     public function index()
@@ -40,7 +35,7 @@ class AuthController extends Controller
 
     public function checkToken()
     {
-        return response(null, Response::HTTP_OK);
+        return response('Your token is valid!', Response::HTTP_OK);
     }
 
 }

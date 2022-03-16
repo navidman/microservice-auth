@@ -31,12 +31,7 @@
                                     "type": {
                                         "type": "boolean",
                                         "format": "text",
-                                        "example": "0 or 1"
-                                    },
-                                    "national_code": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "در صورتی که فیلد تایپ با مقدار 1 ارسال شده بود بدین معنی میباشد که کاربر درحال ثبت نام است و کد ملی باید ارسال شود و در غیر اینصورت نیازی به ارسال کد ملی نیست"
+                                        "example": "0 : already registered user or 1 : new user"
                                     }
                                 },
                                 "type": "object"
@@ -54,10 +49,6 @@
                                         "status": {
                                             "type": "integer",
                                             "example": 200
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "رمز یکبار مصرف ارسال شد"
                                         }
                                     },
                                     "type": "object"
@@ -77,7 +68,7 @@
                                                     "type": "array",
                                                     "items": {
                                                         "type": "string",
-                                                        "example": "خطای مرتبط با فیلد  مورد نظر"
+                                                        "example": "error in fields"
                                                     },
                                                     "collectionFormat": "multi"
                                                 }
@@ -90,7 +81,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "خطا در اطلاعات ورودی"
+                                            "example": "wrong data"
                                         }
                                     },
                                     "type": "object"
@@ -140,10 +131,6 @@
                                         "status": {
                                             "type": "integer",
                                             "example": 200
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "رمز یکبار مصرف ارسال شد"
                                         }
                                     },
                                     "type": "object"
@@ -163,7 +150,7 @@
                                                     "type": "array",
                                                     "items": {
                                                         "type": "string",
-                                                        "example": "خطای مرتبط با فیلد  مورد نظر"
+                                                        "example": "error in fields"
                                                     },
                                                     "collectionFormat": "multi"
                                                 }
@@ -176,7 +163,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "خطا در اطلاعات ورودی"
+                                            "example": "wrong data"
                                         }
                                     },
                                     "type": "object"
@@ -229,10 +216,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "عملیات با موفقیت انجام شد"
-                                        },
                                         "data": {
                                             "type": "array",
                                             "items": {
@@ -245,62 +228,21 @@
                                                         "type": "string",
                                                         "example": "172800"
                                                     },
-                                                    "access_token": {
+                                                    "jwt_token": {
                                                         "type": "string",
                                                         "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYTU1ODg3MDUzMTVmMzc1ZGRiYWY5YzRhMmI3YTQ4YzVmY2NmM2IxZTQxZTcyZTBhMzAzNjU1Yzc0NzIzZTU"
-                                                    },
-                                                    "refresh_token": {
-                                                        "type": "string",
-                                                        "example": "def502008b3bd9cc76b139e6c4dd7d6b72d23684984ef2a4d9e03f96c2e1a6817be0f55b0b2659953cb3506b8ad0080aa0c38e983eb80066ee5564561f02c19203f0efcf3ce86791a05a0d44d15fbfd"
                                                     },
                                                     "user": {
                                                         "type": "array",
                                                         "items": {
                                                             "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "example": "نوید منصوری"
-                                                                },
-                                                                "avatar": {
-                                                                    "type": "string",
-                                                                    "example": "image.png"
-                                                                },
                                                                 "mobile": {
                                                                     "type": "string",
                                                                     "example": "09139071587"
                                                                 },
-                                                                "email": {
-                                                                    "type": "string",
-                                                                    "example": "email"
-                                                                },
-                                                                "verified_at": {
+                                                                "created_at": {
                                                                     "type": "timestamp",
-                                                                    "example": "اگر این فیلد پر شده باشد کاربر به داشبورد هدادیت میشود  و اگر خالی باشد به صفحه ی تکمبل مشخصات کاربری هدایت میشود."
-                                                                },
-                                                                "register_submitted_at": {
-                                                                    "type": "timestamp",
-                                                                    "example": "اگر فیلد بالایی پر نشده بود و کاربر به صفحه تکمیل مشخصات هدایت شد با توجه به پر بودن یا نبودن این فیلد به کاربر اجازه تغییر و تکمیل اطلاعت کاربری داه میشود یا صرفا در انتظار تایید شدن اطلاعات نمایش داده میشود"
-                                                                },
-                                                                "terminals": {
-                                                                    "type": "array",
-                                                                    "items": {
-                                                                        "properties": {
-                                                                            "name_fa": {
-                                                                                "type": "string",
-                                                                                "example": "میلیونا"
-                                                                            },
-                                                                            "website": {
-                                                                                "type": "string",
-                                                                                "example": "Milyoona.com"
-                                                                            },
-                                                                            "active": {
-                                                                                "type": "string",
-                                                                                "example": "0 or 1"
-                                                                            }
-                                                                        },
-                                                                        "type": "object"
-                                                                    },
-                                                                    "collectionFormat": "multi"
+                                                                    "example": "2022-03-15T20:10:12.000000Z"
                                                                 }
                                                             },
                                                             "type": "object"
@@ -334,7 +276,7 @@
                                                     "type": "array",
                                                     "items": {
                                                         "type": "string",
-                                                        "example": "خطای مرتبط با فیلد مورد نظر"
+                                                        "example": "error is fields"
                                                     },
                                                     "collectionFormat": "multi"
                                                 }
@@ -347,7 +289,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "خطا در اطلاعات ورودی"
+                                            "example": "wrong data"
                                         }
                                     },
                                     "type": "object"
@@ -379,7 +321,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "توکن شما معتبر است"
+                                            "example": "Your token is valid!"
                                         }
                                     },
                                     "type": "object"
@@ -399,7 +341,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example": "کاربر غیر مجاز است"
+                                            "example": "Unauthorised"
                                         }
                                     },
                                     "type": "object"
