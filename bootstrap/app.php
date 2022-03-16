@@ -48,6 +48,9 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->register(\SwaggerLume\ServiceProvider::class);
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -61,6 +64,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('jwt');
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
