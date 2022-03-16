@@ -23,7 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
- $app->withFacades();
+$app->withFacades(true, [
+    'App\Services\Authentication\Authentication' => 'authentication',
+]);
 
  $app->withEloquent();
 
@@ -49,6 +51,7 @@ $app->singleton(
 );
 
 $app->register(\SwaggerLume\ServiceProvider::class);
+$app->register(App\Services\Authentication\AuthenticationServiceProvider::class);
 
 
 /*
