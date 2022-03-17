@@ -13,7 +13,6 @@
 |
 */
 
-$router->get('', ['uses' => 'AuthController@index']);
 $router->post('otp', ['uses' => 'AuthController@otp']);
 $router->post('otp/resend', ['uses' => 'AuthController@resendOtp']);
 $router->post('token', ['uses' => 'AuthController@token']);

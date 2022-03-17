@@ -16,17 +16,19 @@ class AuthenticationService
         $this->user_repository = $user_repository;
     }
 
-    public function navid() {
-        return 1;
-    }
-
     public function sendOtp($request)
     {
         $validator = $this->validationForOtp($request);
+        $user = $this->user_repository->getUserByMobile($request->mobile);
         if ($request->type) {
-           $this->registerNewUser($request);
+            if (!$user) {
+                $this->registerNewUser($request);
+            }
+            if($user) {
+                $validator->errors()->add('mobile', 'mobile number already exists!');
+                return response(['errors' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+            }
         } else {
-            $user = $this->user_repository->getUserByMobile($request->mobile);
             if (!$user) {
                 $validator->errors()->add('mobile', 'mobile number not recognized!');
                 return response(['errors' => $validator->errors()], Response::HTTP_BAD_REQUEST);

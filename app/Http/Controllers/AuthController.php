@@ -11,11 +11,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-    }
 
-    public function index()
-    {
-        return Authentication::navid();
     }
 
     public function otp(Request $request)

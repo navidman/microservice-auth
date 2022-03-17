@@ -12,7 +12,8 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::create([
             'mobile' => $data['mobile'],
-            'national_code' => $data['national_code']
+            'otp' => rand(100000, 999999),
+            'otp_expired_at' => Carbon::now()->addMinutes(2)->format('Y-m-d H:i:s')
         ]);
     }
 
