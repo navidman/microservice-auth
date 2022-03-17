@@ -22,7 +22,13 @@ class AuthenticationService
         $user = $this->user_repository->getUserByMobile($request->mobile);
         if ($request->type) {
             if (!$user) {
-                $this->registerNewUser($request);
+                $user = $this->registerNewUser($request);
+                $userInfo = [
+                    'mobile' => $user->mobile,
+                    'otp' => $user->otp,
+                    'otp_expired_at' => $user->otp_expired_at,
+                ];
+                return response($userInfo, Response::HTTP_OK);
             }
             if($user) {
                 $validator->errors()->add('mobile', 'mobile number already exists!');
@@ -36,7 +42,12 @@ class AuthenticationService
                 if (config('app.debug')) {
                     $this->user_repository->storeOtpOnUser($user);
                 }
-                return response(null, Response::HTTP_OK);
+                $userInfo = [
+                    'mobile' => $user->mobile,
+                    'otp' => $user->otp,
+                    'otp_expired_at' => $user->otp_expired_at,
+                ];
+                return response($userInfo, Response::HTTP_OK);
             }
         }
     }
@@ -52,7 +63,12 @@ class AuthenticationService
             if (!config('app.debug')) {
                 $this->user_repository->storeOtpOnUser($user);
             }
-            return response(null, Response::HTTP_OK);
+            $userInfo = [
+                'mobile' => $user->mobile,
+                'otp' => $user->otp,
+                'otp_expired_at' => $user->otp_expired_at,
+            ];
+            return response($userInfo, Response::HTTP_OK);
         }
     }
 
@@ -93,11 +109,12 @@ class AuthenticationService
     private function registerNewUser($request)
     {
         $data = ['mobile' => $request->mobile];
-        $user = $this->user_repository->storeUser($data);
+        $this->user_repository->storeUser($data);
+        $user = $this->user_repository->getUserByMobile($request->mobile);
         if (!config('app.debug')) {
             $this->user_repository->storeOtpOnUser($user);
         }
-        return response(null, Response::HTTP_OK);
+        return $user;
     }
 
     private function validationForToken($request)
