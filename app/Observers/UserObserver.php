@@ -10,7 +10,7 @@ class UserObserver
     public function created(User $user)
     {
         try {
-            dispatch(new NotificationJob($user, $user->getChanges(), 'store'));
+            dispatch(new NotificationJob($user->getDirty(), 'create'));
         } catch (\Exception $exception) {
 
         }
@@ -19,7 +19,7 @@ class UserObserver
     public function updated(User $user)
     {
         try {
-            dispatch(new NotificationJob($user, $user->getChanges(), 'update'));
+            dispatch(new NotificationJob($user->getDirty(), 'update'));
         } catch (\Exception $exception) {
 
         }
@@ -28,7 +28,7 @@ class UserObserver
     public function deleted(User $user)
     {
         try {
-            dispatch(new NotificationJob($user, $user->getChanges(), 'delete'));
+            dispatch(new NotificationJob($user->getDirty(), 'delete'));
         } catch (\Exception $exception) {
 
         }
@@ -37,7 +37,7 @@ class UserObserver
     public function restored(User $user)
     {
         try {
-            dispatch(new NotificationJob($user, $user->getChanges(), 'restore'));
+            dispatch(new NotificationJob($user->getDirty(), 'restore'));
         } catch (\Exception $exception) {
 
         }
@@ -46,7 +46,7 @@ class UserObserver
     public function forceDeleted(User $user)
     {
         try {
-            dispatch(new NotificationJob($user, $user->getChanges(), 'forceDelete'));
+            dispatch(new NotificationJob($user->getDirty(), 'forceDelete'));
         } catch (\Exception $exception) {
 
         }

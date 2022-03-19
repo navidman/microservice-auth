@@ -52,6 +52,7 @@ $app->singleton(
 
 $app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(App\Services\Authentication\AuthenticationServiceProvider::class);
+$app->register(VladimirYuldashev\LaravelQueueRabbitMQ\LaravelQueueRabbitMQServiceProvider::class);
 
 
 /*
@@ -68,6 +69,7 @@ $app->register(App\Services\Authentication\AuthenticationServiceProvider::class)
 $app->configure('app');
 $app->configure('jwt');
 $app->configure('swagger-lume');
+$app->configure('queue');
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +104,7 @@ $app->configure('swagger-lume');
  $app->register(App\Providers\AppServiceProvider::class);
  $app->register(App\Providers\AuthServiceProvider::class);
  $app->register(App\Providers\EventServiceProvider::class);
+
 
 /*
 |--------------------------------------------------------------------------

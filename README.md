@@ -1,24 +1,29 @@
-# Lumen PHP Framework
+Hello, I'm Navid Mansouri and this is snap pay test project.
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+As you can see this is lumen project and I implemented jwt authorization for my app here.
+I also provided swagger api documentation you can check /api/documentation.
+I used Repositories, Facades, Services, Observers and Request classes in these two apps.
+Please once you cloned the project make database and config it in .env, run these 
+commands :
+    1.composer install
+    2.php artisan migrate
+    4.php -S localhost:8000 -t public
+Now you can use postman to test this app.
+Postman header configs :
+    Content-Type    application/x-www-form-urlencoded
+    Authorization   Bearer <token>
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+I implemented observers and job to get models changes and publish in message broker. 
+ So for authentication in other project named microservice-product you need to run both
+ projects at the same time and run <php artisan queue work> command on product app and
+ register your user on auth app and get token. rabbitmq will publish changes on user model 
+ and other app will create the user too. so you can use your token on other app too.
+ please check .env and config/queue.php to configurate your rabbitmq server. I used
+ https://www.cloudamqp.com/ free services. You can use it too.
 
-## Official Documentation
+I hope you have fun using this app.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Regards, Navid
+navidmansourishsh@gmail.com
+09139071587
+ 
